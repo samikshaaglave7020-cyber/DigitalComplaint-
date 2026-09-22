@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Complaint</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo-box">
+            <img src="college_logo.png" alt="College Logo">
+        </div>
+
+        <h1>Pravara Rural Engineering College, Loni</h1>
+
+        <h2>Information Technology Department</h2>
+
+        <h3>Complaint Management System</h3>
+
+        <hr>
+
+        <h2>Delete Complaint</h2>
+
+        <p class="delete-info">
+            Click on the complaint you want to delete.
+        </p>
+
+        <div id="complaintList"></div>
+
+        <br>
+
+        <a href="index.html" class="btn view">
+            Back to Home
+        </a>
+
+    </div>
+
+
+    <script>
+
+        let complaints =
+            JSON.parse(localStorage.getItem("complaints")) || [];
+
+        const complaintList =
+            document.getElementById("complaintList");
+
+
+        // Display complaints
+        function displayComplaints() {
+
+            complaintList.innerHTML = "";
+
+
+            if (complaints.length === 0) {
+
+                complaintList.innerHTML = `
+                    <div class="no-complaints">
+                        No complaints available.
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            complaints.forEach(function(complaint, index) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "delete-complaint-card";
+
+
+                card.innerHTML = `
+
+                    <div>
+                        <strong>Category:</strong>
+                        ${complaint.category || "Not Available"}
+                    </div>
+
+                    <div>
+                        <strong>Complaint:</strong>
+                        ${complaint.description || "Not Available"}
+                    </div>
+
+                    <div>
+                        <strong>Status:</strong>
+                        ${complaint.status || "Pending"}
+                    </div>
+
+                `;
+
+
+                // Click complaint to delete
+                card.addEventListener(
+                    "click",
+                    function() {
+
+                        const confirmDelete =
+                            confirm(
+                                "Are you sure you want to delete this complaint?"
+                            );
+
+
+                        if (confirmDelete) {
+
+                            complaints.splice(index, 1);
+
+
+                            localStorage.setItem(
+                                "complaints",
+                                JSON.stringify(complaints)
+                            );
+
+
+                            displayComplaints();
+
+                        }
+
+                    }
+                );
+
+
+                complaintList.appendChild(card);
+
+            });
+
+        }
+
+
+        displayComplaints();
+
+    </script>
+
+</body>
+
+</html>

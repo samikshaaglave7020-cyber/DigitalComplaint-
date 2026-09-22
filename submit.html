@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Submit Complaint</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>Submit Complaint</h1>
+
+        <form id="complaintForm">
+
+            <label for="category">
+                Complaint Category
+            </label>
+
+            <select id="category" required>
+
+                <option value="">
+                    Select Category
+                </option>
+
+                <option value="Infrastructure">
+                    Infrastructure
+                </option>
+
+                <option value="Laboratory">
+                    Laboratory
+                </option>
+
+                <option value="Classroom">
+                    Classroom
+                </option>
+
+                <option value="Library">
+                    Library
+                </option>
+
+                <option value="Hostel">
+                    Hostel
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label for="description">
+                Complaint Description
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Enter your complaint here..."
+                required>
+            </textarea>
+
+
+            <button type="submit">
+                Submit Complaint
+            </button>
+
+        </form>
+
+        <a href="index.html" class="back-btn">
+            ← Back to Home
+        </a>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>View Complaints</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo-box">
+            <img src="college_logo.png" alt="College Logo">
+        </div>
+
+        <h1>Pravara Rural Engineering College, Loni</h1>
+
+        <h2>Information Technology Department</h2>
+
+        <h3>Complaint Management System</h3>
+
+        <hr>
+
+        <h2>View Complaints</h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Complaint</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="complaintTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <br>
+
+        <a href="index.html" class="btn view">
+            Back to Home
+        </a>
+
+    </div>
+
+
+    <script>
+
+        // Get complaints
+        let complaints =
+            JSON.parse(localStorage.getItem("complaints")) || [];
+
+        const table =
+            document.getElementById("complaintTable");
+
+
+        // Display complaints
+        function displayComplaints() {
+
+            table.innerHTML = "";
+
+            // No complaints
+            if (complaints.length === 0) {
+
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="3">
+                            No complaints submitted.
+                        </td>
+                    </tr>
+                `;
+
+                return;
+            }
+
+
+            // Display each complaint
+            complaints.forEach(function(complaint) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${complaint.category || "Not Available"}
+                    </td>
+
+                    <td>
+                        ${complaint.description || "Not Available"}
+                    </td>
+
+                    <td>
+                        <span class="status ${
+                      complaint.status === "Pending"
+                         ? "pending"
+                      : complaint.status === "In Progress"
+                         ? "in-progress"
+                      : "resolved"
+		               }">
+                 ${complaint.status || "Pending"}
+                  </span>
+						
+                `;
+
+
+                table.appendChild(row);
+
+            });
+
+        }
+
+
+        displayComplaints();
+
+    </script>
+
+</body>
+
+</html>
